@@ -33,7 +33,7 @@ class ApiAuthController extends Controller
             return $this->respondWithToken($token);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['status' => false, 'error' => 'Unauthorized'], 200);
     }
 
     /**
@@ -55,7 +55,7 @@ class ApiAuthController extends Controller
     {
         $this->guard()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['status' => true, 'message' => 'Successfully logged out']);
     }
 
     /**
@@ -78,6 +78,7 @@ class ApiAuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
+            'status' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60

@@ -83,18 +83,18 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
-                    422
+                    200
                 );
             } else { // success
                 $shipsGo = new ShipsGo_API($request->get("authCode"));
                 $getShipLine = $shipsGo->GetShippingLineList();
 
                 if (isset($getShipLine['Message']) || !empty($getShipLine['Message']))
-                    throw new Exception('ShippingLine List not found...!', 422);
+                    throw new Exception('ShippingLine List not found...!', 200);
 
                 $res['status'] = true;
                 $res['message'] = "ShippingLine List get successfully..!";
@@ -103,7 +103,7 @@ class WrapperApiController extends Controller
             }
         } catch (Exception $ex) {
             $res['message'] = $ex->getMessage();
-            return response()->json($res, 422);
+            return response()->json($res, 200);
         }
     }
 

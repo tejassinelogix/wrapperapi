@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "603aa3df2114682de1c042a37926681e",
+    "content-hash": "ea01db82b37d192112e6ccc2cf2f9b25",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1101,16 +1101,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.69",
+            "version": "1.0.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967"
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7106f78428a344bc4f643c233a94e48795f10967",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/585824702f534f8d3cf7fab7225e8466cc4b7493",
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1121,7 @@
                 "league/flysystem-sftp": "<1.0.6"
             },
             "require-dev": {
-                "phpspec/phpspec": "^3.4",
+                "phpspec/phpspec": "^3.4 || ^4.0 || ^5.0 || ^6.0",
                 "phpunit/phpunit": "^5.7.26"
             },
             "suggest": {
@@ -1181,7 +1181,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-05-18T15:13:39+00:00"
+            "time": "2020-07-26T07:20:36+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1408,16 +1408,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
                 "shasum": ""
             },
             "require": {
@@ -1434,7 +1434,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.7-dev"
                 }
             },
             "autoload": {
@@ -1456,7 +1456,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-07-02T17:12:47+00:00"
+            "time": "2020-07-25T13:18:53+00:00"
         },
         {
             "name": "opis/closure",
@@ -2112,6 +2112,72 @@
                 "uuid"
             ],
             "time": "2020-03-29T20:13:32+00:00"
+        },
+        {
+            "name": "realrashid/sweet-alert",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/realrashid/sweet-alert.git",
+                "reference": "7253f8f1b9c7c26ee70d6b7ae641637317e291ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/realrashid/sweet-alert/zipball/7253f8f1b9c7c26ee70d6b7ae641637317e291ee",
+                "reference": "7253f8f1b9c7c26ee70d6b7ae641637317e291ee",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.4|^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "symfony/thanks": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RealRashid\\SweetAlert\\SweetAlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "Alert": "RealRashid\\SweetAlert\\Facades\\Alert"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RealRashid\\SweetAlert\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rashid Ali",
+                    "email": "realrashid05@gmail.com",
+                    "homepage": "https://realrashid.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A BEAUTIFUL, RESPONSIVE, CUSTOMIZABLE, ACCESSIBLE (WAI-ARIA) REPLACEMENT FOR JAVASCRIPT'S POPUP BOXES FOR LARAVEL BY RASHID ALI",
+            "homepage": "https://github.com/realrashid/sweet-alert",
+            "keywords": [
+                "alert",
+                "laravel",
+                "laravel-package",
+                "notifier",
+                "noty",
+                "sweet-alert",
+                "sweet-alert2",
+                "toast"
+            ],
+            "time": "2020-07-17T18:23:42+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

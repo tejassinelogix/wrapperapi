@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('api');
     }
 
     /**
@@ -23,6 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with(['api_auth' => 'login']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getshippinglinelist()
+    {
+        return view('getshippingline')->with(['api_auth' => 'login']);
     }
 }
