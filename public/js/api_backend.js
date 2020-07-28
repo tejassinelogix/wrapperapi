@@ -213,9 +213,11 @@ $(document).ready(function() {
                     "Authorization",
                     "Bearer " + common.getCookie("jwt_token")
                 );
+                $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
-                // On ajax success operation
+                // On ajax success operation  
+ 
                 if (data_resp.status) {
                     var success_head = "";
                     var success_body = "";
@@ -224,9 +226,11 @@ $(document).ready(function() {
                     success_body +=
                         "Container Information List get successfully.";
                     $(".modal-header h4").html(success_head);
-                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $.each(data_resp.data[0],function (key, value) {
+                        $(".response_content").append("<p> "+key+" : "+value+ "</p>");
+                    });
                     $(".error_modal").trigger("click");
-                    // setTimeout(function() { $('.close').trigger('click'); }, 5000);
+                    setTimeout(function() { $('.close').trigger('click'); }, 3000);
                 } else {
 
                     var test = jqXHR.responseJSON.message.authCode;
@@ -304,9 +308,11 @@ $(document).ready(function() {
                     "Authorization",
                     "Bearer " + common.getCookie("jwt_token")
                 );
+                $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
-                // On ajax success operation
+                // On ajax success operation             
+               
                 if (data_resp.status) {
                     var success_head = "";
                     var success_body = "";
@@ -315,7 +321,9 @@ $(document).ready(function() {
                     success_body +=
                         "Container Information Post Inserted successfully.";
                     $(".modal-header h4").html(success_head);
-                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $.each(data_resp.data,function (key, value) {
+                        $(".response_content").append("<p> "+key+" : "+value+ "</p>");
+                    });
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
