@@ -25,6 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
 </head>
 
@@ -76,7 +77,7 @@
                         </li>
                         @endguest
                         <li class="nav-item login_home">
-                            <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item logout_home">
                             <a class="nav-link" href="#">{{ __('Logout') }}</a>

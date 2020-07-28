@@ -35,4 +35,34 @@ class HomeController extends Controller
     {
         return view('getshippingline')->with(['api_auth' => 'login']);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getcontainerlist()
+    {
+        return view('getcontainerlist')->with(['api_auth' => 'login']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function postcontainerlist()
+    {
+        return view('postcontainerlist')->with(['api_auth' => 'login']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function postcustomcontainerlist()
+    {
+        return view('postcustomcontainerlist')->with(['api_auth' => 'login']);
+    }
 }

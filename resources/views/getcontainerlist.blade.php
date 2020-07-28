@@ -5,14 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> Get Shipping Line List API </div>
+                <div class="card-header"> Get Container Information API </div>
 
                 <div class="card-body">
-                    <form id="getshippinglinelist_form" name="getshippinglinelist_form">
+                    <form id="getcontainerinfo_form" name="getcontainerinfo_form">
                         <div class="form-group row required">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">ShipGo Auth Code</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">ShipsGo Auth Code</label>
                             <div class="col-md-6">
-                                <input id="authcode" type="text" class="form-control " name="authcode" value="" required="" autocomplete="name" autofocus="">
+                                <input id="authcode" type="text" class="form-control " name="authcode" value="" required="" autofocus="">
+                            </div>
+                        </div>
+                        <div class="form-group row required">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">ShipsGo Request ID</label>
+                            <div class="col-md-6">
+                                <input id="requestId" type="text" class="form-control " name="requestId" value="" required="" autofocus="">
                             </div>
                         </div>
 

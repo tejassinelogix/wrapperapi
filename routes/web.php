@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/getshippinglinelist', 'HomeController@getshippinglinelist')->name('home');
+/* Wrapper API Load Form View */
+Route::get('/getshippinglinelist', 'HomeController@getshippinglinelist');
+Route::get('/getcontainerlist', 'HomeController@getcontainerlist');
+// Post Wrapper Tickets
+Route::get('/postcontainerlist', 'HomeController@postcontainerlist');
+Route::get('/postcustomcontainerlist', 'HomeController@postcustomcontainerlist');

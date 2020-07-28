@@ -96,7 +96,7 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
@@ -156,7 +156,7 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
@@ -217,7 +217,7 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
@@ -291,7 +291,7 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
@@ -361,7 +361,7 @@ class WrapperApiController extends Controller
             if ($validate->fails()) { // fails
                 return response()->json(
                     [
-                        'success' => false,
+                        'status' => false,
                         'message' => $validate->messages(),
                         'data' => []
                     ],
