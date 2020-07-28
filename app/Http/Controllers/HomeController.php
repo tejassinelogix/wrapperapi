@@ -65,4 +65,24 @@ class HomeController extends Controller
     {
         return view('postcustomcontainerlist')->with(['api_auth' => 'login']);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function postcontainerbilist()
+    {
+        return view('postcontainerbilist')->with(['api_auth' => 'login']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function postcustomcontainerbilist()
+    {
+        return view('postcustomcontainerbilist')->with(['api_auth' => 'login']);
+    }
 }

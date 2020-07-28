@@ -313,7 +313,7 @@ $(document).ready(function() {
                     success_head +=
                         '<i class="fa fa-check-circle" aria-hidden="true"></i> ShipsGo Response, Success..!';
                     success_body +=
-                        "Container Information Post successfully.";
+                        "Container Information Post Inserted successfully.";
                     $(".modal-header h4").html(success_head);
                     $(".modal-body p").html(data_resp.data.join("</p><p>"));
                     $(".error_modal").trigger("click");
@@ -418,7 +418,7 @@ $(document).ready(function() {
                     success_head +=
                         '<i class="fa fa-check-circle" aria-hidden="true"></i> ShipsGo Response, Success..!';
                     success_body +=
-                        "Custom Container Information Post successfully.";
+                        "Custom Container Information Post Inserted successfully.";
                     $(".modal-header h4").html(success_head);
                     $(".modal-body p").html(data_resp.data.join("</p><p>"));
                     $(".error_modal").trigger("click");
@@ -479,6 +479,218 @@ $(document).ready(function() {
                         '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ShipsGo Response, Fail...!';
                     warning_body +=
                         "Custom Container Information not Inserted... Please try after sometime. ";
+                    $(".modal-header h4").html(warning_head);
+                    $(".modal-body p").html(message);
+                    $(".error_modal").trigger("click");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            },
+            complete: function() {
+                // On ajax complete operation
+                // console.log('Complete ajax send');
+            }
+        });
+    });
+
+    // API 5 : PostContainerInfoWithBl
+    $(document).on("submit", "#postcontainerinfobi_form", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST", // Default GET
+            url: APP_URL + "/api/shipsgo/postcontainerinfobi",
+            data: {
+                authCode: $("#authcode").val(),
+                containerNumber: $("#containerNumber").val(),
+                containersCount: $("#containersCount").val(),
+                blContainersRef: $("#blContainersRef").val(),
+                shippingLine: $("#shippingLine").val()
+            },
+            dataType: "json", // text , XML, HTML
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + common.getCookie("jwt_token")
+                );
+            },
+            success: function(data_resp, textStatus, jqXHR) {
+                // On ajax success operation
+                if (data_resp.status) {
+                    var success_head = "";
+                    var success_body = "";
+                    success_head +=
+                        '<i class="fa fa-check-circle" aria-hidden="true"></i> ShipsGo Response, Success..!';
+                    success_body +=
+                        "Container Information Post With BI Inserted successfully.";
+                    $(".modal-header h4").html(success_head);
+                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $(".error_modal").trigger("click");
+                    // setTimeout(function() { $('.close').trigger('click'); }, 5000);
+                } else {
+
+                    var test = jqXHR.responseJSON.message.authCode;
+                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var message = "";
+                    if (typeof test != "undefined" && test !== null) {
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                        if (typeof container_number != "undefined" && container_number !== null) {
+                            message = jqXHR.responseJSON.message.containerNumber.join(
+                                "<p></p>"
+                            );
+                        }
+                    } else {
+                        message = jqXHR.responseJSON.message;
+                    }
+
+                    var warning_head = "";
+                    var warning_body = "";
+                    warning_head +=
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ShipsGo Response, Fail...!';
+                    warning_body +=
+                        "Container Information With BI Post not Inserted... Please try after sometime. ";
+                    $(".modal-header h4").html(warning_head);
+                    $(".modal-body p").html(message);
+                    $(".error_modal").trigger("click");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // On ajax error operation
+                var test = jqXHR.responseJSON.message.authCode;
+                var container_number = jqXHR.responseJSON.message.containerNumber;
+                var message = "";
+                if (typeof test != "undefined" && test !== null) {
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                    if (typeof container_number != "undefined" && container_number !== null) {
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    }
+                } else {
+                    message = jqXHR.responseJSON.message;
+                }
+                if (jqXHR.responseJSON.status == false) {
+                    var warning_head = "";
+                    var warning_body = "";
+                    warning_head +=
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ShipsGo Response, Fail...!';
+                    warning_body +=
+                        "Container Information With BI Post not Inserted... Please try after sometime. ";
+                    $(".modal-header h4").html(warning_head);
+                    $(".modal-body p").html(message);
+                    $(".error_modal").trigger("click");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            },
+            complete: function() {
+                // On ajax complete operation
+                // console.log('Complete ajax send');
+            }
+        });
+    });
+
+    // API 6 : PostContainerInfoWithBl
+    $(document).on("submit", "#postcustomcontainerinfobi_form", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST", // Default GET
+            url: APP_URL + "/api/shipsgo/postcustomcontainerinfobi",
+            data: {
+                authCode: $("#authcode").val(),
+                containerNumber: $("#containerNumber").val(),
+                containersCount: $("#containersCount").val(),
+                emailAddress: $("#emailAddress").val(),
+                referenceNo: $("#referenceNo").val(),
+                blContainersRef: $("#blContainersRef").val(),
+                shippingLine: $("#shippingLine").val()
+            },
+            dataType: "json", // text , XML, HTML
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + common.getCookie("jwt_token")
+                );
+            },
+            success: function(data_resp, textStatus, jqXHR) {
+                // On ajax success operation
+                if (data_resp.status) {
+                    var success_head = "";
+                    var success_body = "";
+                    success_head +=
+                        '<i class="fa fa-check-circle" aria-hidden="true"></i> ShipsGo Response, Success..!';
+                    success_body +=
+                        "Custom Container Information Post With BI Inserted successfully.";
+                    $(".modal-header h4").html(success_head);
+                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $(".error_modal").trigger("click");
+                    // setTimeout(function() { $('.close').trigger('click'); }, 5000);
+                } else {
+
+                    var test = jqXHR.responseJSON.message.authCode;
+                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var message = "";
+                    if (typeof test != "undefined" && test !== null) {
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                        if (typeof container_number != "undefined" && container_number !== null) {
+                            message = jqXHR.responseJSON.message.containerNumber.join(
+                                "<p></p>"
+                            );
+                        }
+                    } else {
+                        message = jqXHR.responseJSON.message;
+                    }
+
+                    var warning_head = "";
+                    var warning_body = "";
+                    warning_head +=
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ShipsGo Response, Fail...!';
+                    warning_body +=
+                        "Custom Container Information With BI Post not Inserted... Please try after sometime. ";
+                    $(".modal-header h4").html(warning_head);
+                    $(".modal-body p").html(message);
+                    $(".error_modal").trigger("click");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // On ajax error operation
+                var test = jqXHR.responseJSON.message.authCode;
+                var container_number = jqXHR.responseJSON.message.containerNumber;
+                var message = "";
+                if (typeof test != "undefined" && test !== null) {
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                    if (typeof container_number != "undefined" && container_number !== null) {
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    }
+                } else {
+                    message = jqXHR.responseJSON.message;
+                }
+                if (jqXHR.responseJSON.status == false) {
+                    var warning_head = "";
+                    var warning_body = "";
+                    warning_head +=
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ShipsGo Response, Fail...!';
+                    warning_body +=
+                        "Custom Container Information With BI Post not Inserted... Please try after sometime. ";
                     $(".modal-header h4").html(warning_head);
                     $(".modal-body p").html(message);
                     $(".error_modal").trigger("click");

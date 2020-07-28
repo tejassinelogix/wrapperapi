@@ -25,3 +25,6 @@ Route::get('/getcontainerlist', 'HomeController@getcontainerlist');
 // Post Wrapper Tickets
 Route::get('/postcontainerlist', 'HomeController@postcontainerlist');
 Route::get('/postcustomcontainerlist', 'HomeController@postcustomcontainerlist');
+// BI 
+Route::get('/postcontainerbilist', 'HomeController@postcontainerbilist');
+Route::get('/postcustomcontainerbilist', 'HomeController@postcustomcontainerbilist');
