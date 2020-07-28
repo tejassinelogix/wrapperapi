@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-
-
-use DB;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,41 +19,7 @@ class WrapperApiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
     }
-
-    /*
-     @author    :: Tejas
-     @task_id   :: reference table connection
-     @task_desc :: 
-     @params    :: 
-     @return    :: 
-    */
-    public function get_user_list_server()
-    {
-        $res = Config('response_format.RES_RESULT');
-        try {
-            // dd(DB::connection());
-            $users = DB::connection('mysql')->select("SELECT * FROM `users`");
-            if (!isset($users) || empty($users))
-                throw new Exception('Error Processing Request', 1);
-
-            $res['status'] = true;
-            $res['message'] = "User List get successfully..!";
-            $res['data'] =  $users;
-            return response()->json($res);
-        } catch (Exception $ex) {
-            $res['status'] = false;
-            $res['data'] = [];
-            $res['message'] = $ex->getMessage();
-            $res['ex_message'] = $ex->getMessage();
-            $res['ex_code'] = $ex->getCode();
-            $res['ex_file'] = $ex->getFile();
-            $res['ex_line'] = $ex->getLine();
-            return response()->json($res);
-        }
-    }
-
 
     /*
      @author    :: Tejas
@@ -87,14 +50,14 @@ class WrapperApiController extends Controller
                         'message' => $validate->messages(),
                         'data' => []
                     ],
-                    200
+                    422
                 );
             } else { // success
                 $shipsGo = new ShipsGo_API($request->get("authCode"));
                 $getShipLine = $shipsGo->GetShippingLineList();
 
                 if (isset($getShipLine['Message']) || !empty($getShipLine['Message']))
-                    throw new Exception('ShippingLine List not found...!', 200);
+                    throw new Exception('ShippingLine List not found...!', 422);
 
                 $res['status'] = true;
                 $res['message'] = "ShippingLine List get successfully..!";
@@ -103,7 +66,7 @@ class WrapperApiController extends Controller
             }
         } catch (Exception $ex) {
             $res['message'] = $ex->getMessage();
-            return response()->json($res, 200);
+            return response()->json($res, 422);
         }
     }
 

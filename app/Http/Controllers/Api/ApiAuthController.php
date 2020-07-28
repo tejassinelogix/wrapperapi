@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class ApiAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        // $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     /**
@@ -43,7 +44,20 @@ class ApiAuthController extends Controller
      */
     public function me()
     {
-        return response()->json($this->guard()->user());
+        try {
+            if (empty($this->guard()->user()))
+                throw new Exception("Anthorization Token Request", 1);
+
+            return response()->json(['status' => true, 'message' => 'User Details get Successfully..!', 'data' => $this->guard()->user()]);
+        } catch (Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json(['status' => false, 'message' => 'Token is Invalid', 'data' => []]);
+            } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json(['status' => false, 'message' => 'Token is Expired', 'data' => []]);
+            } else {
+                return response()->json(['status' => false, 'message' => 'Authorization Token not found', 'data' => []]);
+            }
+        }
     }
 
     /**
@@ -53,8 +67,17 @@ class ApiAuthController extends Controller
      */
     public function logout()
     {
-        $this->guard()->logout();
-
+        try {
+            $this->guard()->logout();
+        } catch (Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json(['status' => false, 'message' => 'Token is Invalid', 'data' => []]);
+            } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json(['status' => false, 'message' => 'Token is Expired', 'data' => []]);
+            } else {
+                return response()->json(['status' => false, 'message' => 'Authorization Token not found', 'data' => []]);
+            }
+        }
         return response()->json(['status' => true, 'message' => 'Successfully logged out']);
     }
 
@@ -65,7 +88,17 @@ class ApiAuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken($this->guard()->refresh());
+        try {
+            return $this->respondWithToken($this->guard()->refresh());
+        } catch (Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json(['status' => false, 'message' => 'Token is Invalid', 'data' => []]);
+            } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json(['status' => false, 'message' => 'Token is Expired', 'data' => []]);
+            } else {
+                return response()->json(['status' => false, 'message' => 'Authorization Token not found', 'data' => []]);
+            }
+        }
     }
 
     /**

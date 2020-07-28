@@ -14,36 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-/*
-Route::group([
-    'middleware' => 'api',
-    'namespace' => 'App\Http\Controllers\Api',
-    'prefix' => 'auth'
-], function ($router) {
-    Route::post('/login', 'Api\ApiAuthController@login');
-    Route::post('logout', 'Api\ApiAuthController@logout');
-    Route::post('refresh', 'Api\ApiAuthController@refresh');
-    Route::post('me', 'Api\ApiAuthController@me');
-    // });
-
-
-
-    // ShipsGo Get Requests
-    // Route::post('shipsgo/shippinglinelist', 'Api\WrapperApiController@get_shippingline_list');
-    // Route::post('shipsgo/containerinfo', 'Api\WrapperApiController@get_container_info');
-
-    // // ShipsGo Post Requests Container Info
-    // Route::post('shipsgo/postcontainerinfo', 'Api\WrapperApiController@post_container_info');
-    // Route::post('shipsgo/postcustomcontainerinfo', 'Api\WrapperApiController@post_customcontainer_info');
-
-    // // ShipsGo Post Requests Container Info with BI
-    // Route::post('shipsgo/postcontainerinfobi', 'Api\WrapperApiController@post_containerinfo_bi');
-    // Route::post('shipsgo/postcustomcontainerinfobi', 'Api\WrapperApiController@post_customcontainerinfo_bi');
-//}); */
-
+/* Comment This Code After JWT Auth Integrated */
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
+     return $request->user();
+});*/
 
 Route::group([
     'middleware' => 'api',
@@ -55,9 +29,8 @@ Route::group([
     Route::post('me', 'Api\ApiAuthController@me');
 });
 
-Route::group([
-    'middleware' => 'api',
-], function ($router) {
+/* JWT Token Verification for Send Request and Receive Response */
+Route::group(['middleware' => ['jwt.verify']], function () {
     // ShipsGo Get Requests
     Route::post('shipsgo/shippinglinelist', 'Api\WrapperApiController@get_shippingline_list');
     Route::post('shipsgo/containerinfo', 'Api\WrapperApiController@get_container_info');
@@ -70,5 +43,3 @@ Route::group([
     Route::post('shipsgo/postcontainerinfobi', 'Api\WrapperApiController@post_containerinfo_bi');
     Route::post('shipsgo/postcustomcontainerinfobi', 'Api\WrapperApiController@post_customcontainerinfo_bi');
 });
-
-// Route::post('/login', 'Api\ApiAuthController@login');
