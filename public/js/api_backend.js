@@ -139,9 +139,9 @@ $(document).ready(function() {
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
-                    var test = jqXHR.responseJSON.message.authCode;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (typeof auth_code != "undefined" && auth_code !== null) {
                         message = jqXHR.responseJSON.message.authCode.join(
                             "</p><p>"
                         );
@@ -165,9 +165,9 @@ $(document).ready(function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
                 if (jqXHR.responseJSON.status == false) {
-                    var test = jqXHR.responseJSON.message.authCode;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (typeof auth_code != "undefined" && auth_code !== null) {
                         message = jqXHR.responseJSON.message.authCode.join(
                             "</p><p>"
                         );
@@ -216,8 +216,8 @@ $(document).ready(function() {
                 $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
-                // On ajax success operation  
- 
+                // On ajax success operation
+
                 if (data_resp.status) {
                     var success_head = "";
                     var success_body = "";
@@ -226,16 +226,17 @@ $(document).ready(function() {
                     success_body +=
                         "Container Information List get successfully.";
                     $(".modal-header h4").html(success_head);
-                    $.each(data_resp.data[0],function (key, value) {
-                        $(".response_content").append("<p> "+key+" : "+value+ "</p>");
+                    $.each(data_resp.data[0], function(key, value) {
+                        $(".response_content").append(
+                            "<p> " + key + " : " + value + "</p>"
+                        );
                     });
                     $(".error_modal").trigger("click");
-                    setTimeout(function() { $('.close').trigger('click'); }, 3000);
+                    // setTimeout(function() { $('.close').trigger('click'); }, 3000);
                 } else {
-
-                    var test = jqXHR.responseJSON.message.authCode;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (typeof auth_code != "undefined" && auth_code !== null) {
                         message = jqXHR.responseJSON.message.authCode.join(
                             "<p></p>"
                         );
@@ -259,9 +260,9 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
-                var test = jqXHR.responseJSON.message.authCode;
+                var auth_code = jqXHR.responseJSON.message.authCode;
                 var message = "";
-                if (typeof test != "undefined" && test !== null) {
+                if (typeof auth_code != "undefined" && auth_code !== null) {
                     message = jqXHR.responseJSON.message.authCode.join(
                         "<p></p>"
                     );
@@ -311,8 +312,7 @@ $(document).ready(function() {
                 $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
-                // On ajax success operation             
-               
+                // On ajax success operation
                 if (data_resp.status) {
                     var success_head = "";
                     var success_body = "";
@@ -321,25 +321,51 @@ $(document).ready(function() {
                     success_body +=
                         "Container Information Post Inserted successfully.";
                     $(".modal-header h4").html(success_head);
-                    $.each(data_resp.data,function (key, value) {
-                        $(".response_content").append("<p> "+key+" : "+value+ "</p>");
+                    $.each(data_resp.data, function(key, value) {
+                        $(".response_content").append(
+                            "<p> " + key + " : " + value + "</p>"
+                        );
                     });
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
-
-                    var test = jqXHR.responseJSON.message.authCode;
-                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
+                    var container_number =
+                        jqXHR.responseJSON.message.containerNumber;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Auth Code and Container Number are error
                         message = jqXHR.responseJSON.message.authCode.join(
                             "<p></p>"
                         );
-                        if (typeof container_number != "undefined" && container_number !== null) {
-                            message = jqXHR.responseJSON.message.containerNumber.join(
-                                "<p></p>"
-                            );
-                        }
+                        message += jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number == "undefined" &&
+                        container_number == null
+                    ) {
+                        // auth_code is error
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code == "undefined" &&
+                        auth_code == null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Container Number is error
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
                     } else {
                         message = jqXHR.responseJSON.message;
                     }
@@ -360,21 +386,47 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
-                var test = jqXHR.responseJSON.message.authCode;
-                var container_number = jqXHR.responseJSON.message.containerNumber;
+                var auth_code = jqXHR.responseJSON.message.authCode;
+                var container_number =
+                    jqXHR.responseJSON.message.containerNumber;
                 var message = "";
-                if (typeof test != "undefined" && test !== null) {
+                if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Auth Code and Container Number are error
                     message = jqXHR.responseJSON.message.authCode.join(
                         "<p></p>"
                     );
-                    if (typeof container_number != "undefined" && container_number !== null) {
-                        message = jqXHR.responseJSON.message.containerNumber.join(
-                            "<p></p>"
-                        );
-                    }
+                    message += jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number == "undefined" &&
+                    container_number == null
+                ) {
+                    // auth_code is error
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code == "undefined" &&
+                    auth_code == null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Container Number is error
+                    message = jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
                 } else {
                     message = jqXHR.responseJSON.message;
                 }
+
                 if (jqXHR.responseJSON.status == false) {
                     var warning_head = "";
                     var warning_body = "";
@@ -397,8 +449,8 @@ $(document).ready(function() {
         });
     });
 
-     // API 4 : PostCustomContainerForm
-     $(document).on("submit", "#postcustomcontainerinfo_form", function(e) {
+    // API 4 : PostCustomContainerForm
+    $(document).on("submit", "#postcustomcontainerinfo_form", function(e) {
         e.preventDefault();
 
         $.ajax({
@@ -417,6 +469,7 @@ $(document).ready(function() {
                     "Authorization",
                     "Bearer " + common.getCookie("jwt_token")
                 );
+                $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
                 // On ajax success operation
@@ -428,23 +481,51 @@ $(document).ready(function() {
                     success_body +=
                         "Custom Container Information Post Inserted successfully.";
                     $(".modal-header h4").html(success_head);
-                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $.each(data_resp.data, function(key, value) {
+                        $(".response_content").append(
+                            "<p> " + key + " : " + value + "</p>"
+                        );
+                    });
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
-
-                    var test = jqXHR.responseJSON.message.authCode;
-                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
+                    var container_number =
+                        jqXHR.responseJSON.message.containerNumber;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Auth Code and Container Number are error
                         message = jqXHR.responseJSON.message.authCode.join(
                             "<p></p>"
                         );
-                        if (typeof container_number != "undefined" && container_number !== null) {
-                            message = jqXHR.responseJSON.message.containerNumber.join(
-                                "<p></p>"
-                            );
-                        }
+                        message += jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number == "undefined" &&
+                        container_number == null
+                    ) {
+                        // auth_code is error
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code == "undefined" &&
+                        auth_code == null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Container Number is error
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
                     } else {
                         message = jqXHR.responseJSON.message;
                     }
@@ -465,21 +546,48 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
-                var test = jqXHR.responseJSON.message.authCode;
-                var container_number = jqXHR.responseJSON.message.containerNumber;
+
+                var auth_code = jqXHR.responseJSON.message.authCode;
+                var container_number =
+                    jqXHR.responseJSON.message.containerNumber;
                 var message = "";
-                if (typeof test != "undefined" && test !== null) {
+                if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Auth Code and Container Number are error
                     message = jqXHR.responseJSON.message.authCode.join(
                         "<p></p>"
                     );
-                    if (typeof container_number != "undefined" && container_number !== null) {
-                        message = jqXHR.responseJSON.message.containerNumber.join(
-                            "<p></p>"
-                        );
-                    }
+                    message += jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number == "undefined" &&
+                    container_number == null
+                ) {
+                    // auth_code is error
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code == "undefined" &&
+                    auth_code == null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Container Number is error
+                    message = jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
                 } else {
                     message = jqXHR.responseJSON.message;
                 }
+
                 if (jqXHR.responseJSON.status == false) {
                     var warning_head = "";
                     var warning_body = "";
@@ -522,6 +630,7 @@ $(document).ready(function() {
                     "Authorization",
                     "Bearer " + common.getCookie("jwt_token")
                 );
+                $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
                 // On ajax success operation
@@ -533,23 +642,51 @@ $(document).ready(function() {
                     success_body +=
                         "Container Information Post With BI Inserted successfully.";
                     $(".modal-header h4").html(success_head);
-                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $.each(data_resp.data, function(key, value) {
+                        $(".response_content").append(
+                            "<p> " + key + " : " + value + "</p>"
+                        );
+                    });
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
-
-                    var test = jqXHR.responseJSON.message.authCode;
-                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
+                    var container_number =
+                        jqXHR.responseJSON.message.containerNumber;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Auth Code and Container Number are error
                         message = jqXHR.responseJSON.message.authCode.join(
                             "<p></p>"
                         );
-                        if (typeof container_number != "undefined" && container_number !== null) {
-                            message = jqXHR.responseJSON.message.containerNumber.join(
-                                "<p></p>"
-                            );
-                        }
+                        message += jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number == "undefined" &&
+                        container_number == null
+                    ) {
+                        // auth_code is error
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code == "undefined" &&
+                        auth_code == null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Container Number is error
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
                     } else {
                         message = jqXHR.responseJSON.message;
                     }
@@ -570,21 +707,47 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
-                var test = jqXHR.responseJSON.message.authCode;
-                var container_number = jqXHR.responseJSON.message.containerNumber;
+                var auth_code = jqXHR.responseJSON.message.authCode;
+                var container_number =
+                    jqXHR.responseJSON.message.containerNumber;
                 var message = "";
-                if (typeof test != "undefined" && test !== null) {
+                if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Auth Code and Container Number are error
                     message = jqXHR.responseJSON.message.authCode.join(
                         "<p></p>"
                     );
-                    if (typeof container_number != "undefined" && container_number !== null) {
-                        message = jqXHR.responseJSON.message.containerNumber.join(
-                            "<p></p>"
-                        );
-                    }
+                    message += jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number == "undefined" &&
+                    container_number == null
+                ) {
+                    // auth_code is error
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code == "undefined" &&
+                    auth_code == null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Container Number is error
+                    message = jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
                 } else {
                     message = jqXHR.responseJSON.message;
                 }
+
                 if (jqXHR.responseJSON.status == false) {
                     var warning_head = "";
                     var warning_body = "";
@@ -629,6 +792,7 @@ $(document).ready(function() {
                     "Authorization",
                     "Bearer " + common.getCookie("jwt_token")
                 );
+                $(".response_content").html("");
             },
             success: function(data_resp, textStatus, jqXHR) {
                 // On ajax success operation
@@ -640,23 +804,51 @@ $(document).ready(function() {
                     success_body +=
                         "Custom Container Information Post With BI Inserted successfully.";
                     $(".modal-header h4").html(success_head);
-                    $(".modal-body p").html(data_resp.data.join("</p><p>"));
+                    $.each(data_resp.data, function(key, value) {
+                        $(".response_content").append(
+                            "<p> " + key + " : " + value + "</p>"
+                        );
+                    });
                     $(".error_modal").trigger("click");
                     // setTimeout(function() { $('.close').trigger('click'); }, 5000);
                 } else {
-
-                    var test = jqXHR.responseJSON.message.authCode;
-                    var container_number = jqXHR.responseJSON.message.containerNumber;
+                    var auth_code = jqXHR.responseJSON.message.authCode;
+                    var container_number =
+                        jqXHR.responseJSON.message.containerNumber;
                     var message = "";
-                    if (typeof test != "undefined" && test !== null) {
+                    if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Auth Code and Container Number are error
                         message = jqXHR.responseJSON.message.authCode.join(
                             "<p></p>"
                         );
-                        if (typeof container_number != "undefined" && container_number !== null) {
-                            message = jqXHR.responseJSON.message.containerNumber.join(
-                                "<p></p>"
-                            );
-                        }
+                        message += jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code != "undefined" &&
+                        auth_code !== null &&
+                        typeof container_number == "undefined" &&
+                        container_number == null
+                    ) {
+                        // auth_code is error
+                        message = jqXHR.responseJSON.message.authCode.join(
+                            "<p></p>"
+                        );
+                    } else if (
+                        typeof auth_code == "undefined" &&
+                        auth_code == null &&
+                        typeof container_number != "undefined" &&
+                        container_number !== null
+                    ) {
+                        // Container Number is error
+                        message = jqXHR.responseJSON.message.containerNumber.join(
+                            "<p></p>"
+                        );
                     } else {
                         message = jqXHR.responseJSON.message;
                     }
@@ -677,21 +869,47 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // On ajax error operation
-                var test = jqXHR.responseJSON.message.authCode;
-                var container_number = jqXHR.responseJSON.message.containerNumber;
+                var auth_code = jqXHR.responseJSON.message.authCode;
+                var container_number =
+                    jqXHR.responseJSON.message.containerNumber;
                 var message = "";
-                if (typeof test != "undefined" && test !== null) {
+                if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Auth Code and Container Number are error
                     message = jqXHR.responseJSON.message.authCode.join(
                         "<p></p>"
                     );
-                    if (typeof container_number != "undefined" && container_number !== null) {
-                        message = jqXHR.responseJSON.message.containerNumber.join(
-                            "<p></p>"
-                        );
-                    }
+                    message += jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code != "undefined" &&
+                    auth_code !== null &&
+                    typeof container_number == "undefined" &&
+                    container_number == null
+                ) {
+                    // auth_code is error
+                    message = jqXHR.responseJSON.message.authCode.join(
+                        "<p></p>"
+                    );
+                } else if (
+                    typeof auth_code == "undefined" &&
+                    auth_code == null &&
+                    typeof container_number != "undefined" &&
+                    container_number !== null
+                ) {
+                    // Container Number is error
+                    message = jqXHR.responseJSON.message.containerNumber.join(
+                        "<p></p>"
+                    );
                 } else {
                     message = jqXHR.responseJSON.message;
                 }
+
                 if (jqXHR.responseJSON.status == false) {
                     var warning_head = "";
                     var warning_body = "";

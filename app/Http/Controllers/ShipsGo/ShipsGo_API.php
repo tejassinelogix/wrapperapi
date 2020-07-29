@@ -81,7 +81,6 @@ class ShipsGo_API
 		} else {
 			$postData['emailAddress'] = (is_array($emails)) ? implode(',', $emails) : str_replace(' ', '', $emails);
 			$postData['referenceNo'] = $referenceNo;
-
 			return $this->getData('PostCustomContainerForm', $postData);
 		}
 	}

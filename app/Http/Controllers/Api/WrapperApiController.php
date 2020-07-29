@@ -225,10 +225,10 @@ class WrapperApiController extends Controller
                 );
             } else { // success
                 $shipsGo = new ShipsGo_API($request->get("authCode"));
-                if ($request->has('email') && $request->has('referenceNo')) {
-                    $postCustomContainer = $shipsGo->PostContainerInfo($request->get("containerNumber"), $request->get("shippingLine"), $request->get("email"), $request->get("referenceNo"));
+                if ($request->has('emailAddress') && $request->has('referenceNo')) {
+                    $postCustomContainer = $shipsGo->PostContainerInfo($request->get("containerNumber"), $request->get("shippingLine"), $request->get("emailAddress"), $request->get("referenceNo"));
                 } else {
-                    $postCustomContainer = $shipsGo->PostContainerInfo($request->get("containerNumber"), $request->get("shippingLine"), $request->get("email"));
+                    $postCustomContainer = $shipsGo->PostContainerInfo($request->get("containerNumber"), $request->get("shippingLine"), $request->get("emailAddress"));
                 }
 
                 if (isset($postCustomContainer['Message']) || !empty($postCustomContainer['Message']))
