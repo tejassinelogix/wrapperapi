@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\ShipsGo;
 
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ShipsGo\ShipsGo_API;
+use App\Http\Controllers\Api\ShipsGo\ShipsGo_API;
 
-class WrapperApiController extends Controller
+class ShipsGoWrapperApiController extends Controller
 {
 
     /**

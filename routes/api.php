@@ -32,14 +32,14 @@ Route::group([
 /* JWT Token Verification for Send Request and Receive Response */
 Route::group(['middleware' => ['jwt.verify']], function () {
     // ShipsGo Get Requests
-    Route::post('shipsgo/shippinglinelist', 'Api\WrapperApiController@get_shippingline_list');
-    Route::post('shipsgo/containerinfo', 'Api\WrapperApiController@get_container_info');
+    Route::post('shipsgo/shippinglinelist', 'Api\ShipsGo\ShipsGoWrapperApiController@get_shippingline_list');
+    Route::post('shipsgo/containerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@get_container_info');
 
     // ShipsGo Post Requests Container Info
-    Route::post('shipsgo/postcontainerinfo', 'Api\WrapperApiController@post_container_info');
-    Route::post('shipsgo/postcustomcontainerinfo', 'Api\WrapperApiController@post_customcontainer_info');
+    Route::post('shipsgo/postcontainerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@post_container_info');
+    Route::post('shipsgo/postcustomcontainerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainer_info');
 
     // ShipsGo Post Requests Container Info with BI
-    Route::post('shipsgo/postcontainerinfobi', 'Api\WrapperApiController@post_containerinfo_bi');
-    Route::post('shipsgo/postcustomcontainerinfobi', 'Api\WrapperApiController@post_customcontainerinfo_bi');
+    Route::post('shipsgo/postcontainerinfobi', 'Api\ShipsGo\ShipsGoWrapperApiController@post_containerinfo_bi');
+    Route::post('shipsgo/postcustomcontainerinfobi', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainerinfo_bi');
 });

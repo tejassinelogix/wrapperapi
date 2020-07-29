@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function getshippinglinelist()
     {
-        return view('getshippingline')->with(['api_auth' => 'login']);
+        return view('shipsgo.getshippingline')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -43,7 +43,7 @@ class HomeController extends Controller
      */
     public function getcontainerlist()
     {
-        return view('getcontainerlist')->with(['api_auth' => 'login']);
+        return view('shipsgo.getcontainerlist')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -53,7 +53,7 @@ class HomeController extends Controller
      */
     public function postcontainerlist()
     {
-        return view('postcontainerlist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcontainerlist')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -63,7 +63,7 @@ class HomeController extends Controller
      */
     public function postcustomcontainerlist()
     {
-        return view('postcustomcontainerlist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcustomcontainerlist')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -73,7 +73,7 @@ class HomeController extends Controller
      */
     public function postcontainerbilist()
     {
-        return view('postcontainerbilist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcontainerbilist')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -83,6 +83,6 @@ class HomeController extends Controller
      */
     public function postcustomcontainerbilist()
     {
-        return view('postcustomcontainerbilist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcustomcontainerbilist')->with(['api_auth' => 'login']);
     }
 }

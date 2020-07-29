@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ShipsGo;
+namespace App\Http\Controllers\Api\ShipsGo;
 
 class ShipsGo_API
 {
