@@ -247,15 +247,14 @@ class ShipsGoWrapperApiController extends Controller
 
     /*
      @author    :: Tejas
-     @task_id   :: PostContainer Information With BI fetch from ShipsGo
-     @task_desc :: PostContainer Information With BI fetch from ShipsGo Server
-     @params    :: AuthCode, Container Number, ShippingLine, Containers Count, BI Containers Ref
+     @task_id   :: PostContainer Information With BL fetch from ShipsGo
+     @task_desc :: PostContainer Information With BL fetch from ShipsGo Server
+     @params    :: AuthCode, Container Number, ShippingLine, Containers Count, BL Containers Ref
      @return    :: json status true / false with data and message  
     */
-    public function post_containerinfo_bi(Request $request)
+    public function post_containerinfo_bl(Request $request)
     {
         $res = Config('response_format.RES_RESULT');
-
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
@@ -322,7 +321,7 @@ class ShipsGoWrapperApiController extends Controller
      @params    :: AuthCode, Container Number, ShippingLine, Email, Reference Number (Optional), Containers Count, BI Containers Ref
      @return    :: json status true / false with data and message  
     */
-    public function post_customcontainerinfo_bi(Request $request)
+    public function post_customcontainerinfo_bl(Request $request)
     {
         $res = Config('response_format.RES_RESULT');
         try {

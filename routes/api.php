@@ -40,6 +40,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('shipsgo/postcustomcontainerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainer_info');
 
     // ShipsGo Post Requests Container Info with BI
-    Route::post('shipsgo/postcontainerinfobi', 'Api\ShipsGo\ShipsGoWrapperApiController@post_containerinfo_bi');
-    Route::post('shipsgo/postcustomcontainerinfobi', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainerinfo_bi');
+    Route::post('shipsgo/postcontainerinfobl', 'Api\ShipsGo\ShipsGoWrapperApiController@post_containerinfo_bl');
+    Route::post('shipsgo/postcustomcontainerinfobl', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainerinfo_bl');
 });

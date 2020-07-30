@@ -71,9 +71,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postcontainerbilist()
+    public function postcontainerbllist()
     {
-        return view('shipsgo.postcontainerbilist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcontainerbllist')->with(['api_auth' => 'login']);
     }
 
     /**
@@ -81,8 +81,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postcustomcontainerbilist()
+    public function postcustomcontainerbllist()
     {
-        return view('shipsgo.postcustomcontainerbilist')->with(['api_auth' => 'login']);
+        return view('shipsgo.postcustomcontainerbllist')->with(['api_auth' => 'login']);
     }
 }

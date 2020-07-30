@@ -26,5 +26,5 @@ Route::get('/getcontainerlist', 'HomeController@getcontainerlist');
 Route::get('/postcontainerlist', 'HomeController@postcontainerlist');
 Route::get('/postcustomcontainerlist', 'HomeController@postcustomcontainerlist');
 // BI 
-Route::get('/postcontainerbilist', 'HomeController@postcontainerbilist');
-Route::get('/postcustomcontainerbilist', 'HomeController@postcustomcontainerbilist');
+Route::get('/postcontainerbllist', 'HomeController@postcontainerbllist');
+Route::get('/postcustomcontainerbllist', 'HomeController@postcustomcontainerbllist');

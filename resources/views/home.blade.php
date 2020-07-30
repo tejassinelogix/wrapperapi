@@ -17,9 +17,9 @@
                         &nbsp;
                     </p>
                     <p>
-                        <a class='btn btn-primary btn-sm' id='post_container_info_bi' name='post_container_info_bi' href="{{ url('postcontainerbilist') }}"> Post Container Info With BI</a>
+                        <a class='btn btn-primary btn-sm' id='post_container_info_bi' name='post_container_info_bi' href="{{ url('postcontainerbllist') }}"> Post Container Info With BL</a>
                         &nbsp;
-                        <a class='btn btn-primary btn-sm' id='post_customcontainer_info_bi' name='post_customcontainer_info_bi' href="{{ url('postcustomcontainerbilist') }}"> Post Custom Container Info With BI</a>
+                        <a class='btn btn-primary btn-sm' id='post_customcontainer_info_bi' name='post_customcontainer_info_bi' href="{{ url('postcustomcontainerbllist') }}"> Post Custom Container Info With BI</a>
                     </p>
                 </div>
 
