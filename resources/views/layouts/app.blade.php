@@ -77,6 +77,9 @@
                         <li class="nav-item login_home">
                             <a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a>
                         </li>
+                        <!-- <li class="nav-item refresh">
+                            <a class="nav-link" href="#">{{ __('Refresh') }}</a>
+                        </li> -->
                         <li class="nav-item logout_home">
                             <a class="nav-link" href="#">{{ __('Logout') }}</a>
                         </li>

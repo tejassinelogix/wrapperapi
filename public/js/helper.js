@@ -66,6 +66,40 @@ $(document).ready(function() {
 
      // Logout Ajax JWT
      $(document).on("click", ".logout_home", function(e) {
+        logout();
+    });
+
+     // Refresh Ajax JWT
+    $(document).on("click", ".refresh", function(e) {
+        refresh_me();
+    });
+
+    function refresh_me(){
+        $.ajax({
+            type: "POST", // Default GET
+            url: APP_URL + "/api/auth/refresh",
+            data: { authCode: 123 },
+            dataType: "json", // text , XML, HTML
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + common.getCookie("jwt_token")
+                );
+            },
+            success: function(data_resp, textStatus, jqXHR) {
+                // On ajax success operation
+                if (data_resp.status) {
+                    logout();
+                } 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {                
+            },
+            complete: function() {
+            }
+        });
+    }
+
+    function logout(){
         $.ajax({
             type: "POST", // Default GET
             url: APP_URL + "/api/auth/logout",
@@ -91,23 +125,14 @@ $(document).ready(function() {
                     common.delCookie("jwt_token");
                     window.location.href = APP_URL;
                 } else {
-                    swal("error", {
-                        title: "Logout Fails!",
-                        text: "Logout Failed, Please try again..!",
-                        icon: "error",
-                        button: false,
-                        timer: 3000
-                    });
+                    refresh_me();
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                // On ajax error operation
-                // console.log(textStatus, errorThrown);
+                refresh_me();
             },
             complete: function() {
-                // On ajax complete operation
-                // console.log('Complete ajax send');
             }
         });
-    });
+    }
 });
