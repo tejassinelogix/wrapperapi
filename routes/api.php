@@ -48,4 +48,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 Route::group(['middleware' => ['jwt.verify']], function () {
     // TransferWise Get Requests
     Route::post('transferwise/profiles', 'Api\Transferwise\TransferwiseWrapperApiController@get_profile_info');
+
+    // Recipient Accounts
+    Route::post('transferwise/createrecipientaccount', 'Api\Transferwise\TransferwiseWrapperApiController@create_recipient_accounts');
 });
