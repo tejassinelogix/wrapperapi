@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\ShipsGo;
 
 use Exception;
+use App\Rules\MatchAuthCode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
@@ -34,8 +35,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter
@@ -83,8 +84,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter
@@ -133,8 +134,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter
@@ -193,8 +194,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter
@@ -258,8 +259,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter
@@ -327,8 +328,8 @@ class ShipsGoWrapperApiController extends Controller
         try {
             $validate = Validator::make($request->all(), [
                 'authCode' => [
-                    'required',
-                    'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
                     'string',
                     'min:8',             // must be at least 8 characters in length
                     'regex:/[a-z]/',      // must contain at least one lowercase letter

@@ -29,7 +29,7 @@ Route::group([
     Route::post('me', 'Api\ApiAuthController@me');
 });
 
-/* JWT Token Verification for Send Request and Receive Response */
+/* JWT Token Verification for ShipsGo Send Request and Receive Response */
 Route::group(['middleware' => ['jwt.verify']], function () {
     // ShipsGo Get Requests
     Route::post('shipsgo/shippinglinelist', 'Api\ShipsGo\ShipsGoWrapperApiController@get_shippingline_list');
@@ -42,4 +42,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // ShipsGo Post Requests Container Info with BI
     Route::post('shipsgo/postcontainerinfobl', 'Api\ShipsGo\ShipsGoWrapperApiController@post_containerinfo_bl');
     Route::post('shipsgo/postcustomcontainerinfobl', 'Api\ShipsGo\ShipsGoWrapperApiController@post_customcontainerinfo_bl');
+});
+
+/* JWT Token Verification for Transferwise Send Request and Receive Response */
+Route::group(['middleware' => ['jwt.verify']], function () {
+    // TransferWise Get Requests
+    Route::post('transferwise/profiles', 'Api\Transferwise\TransferwiseWrapperApiController@get_profile_info');
 });
