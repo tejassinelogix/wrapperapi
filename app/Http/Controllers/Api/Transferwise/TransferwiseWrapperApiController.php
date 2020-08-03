@@ -230,10 +230,10 @@ class TransferwiseWrapperApiController extends Controller
                 $postData['details']['legalType'] = $request->get("legalType");
                 $postData['details']['sortCode'] = $request->get("sortCode");
                 $postData['details']['accountNumber'] = $request->get("accountNumber");
-                // dd($postData);
+
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $addRecipient = $transferWise->addRecipientAccounts($postData);
-                dd($addRecipient);
+
                 if ((isset($addRecipient['error']) || isset($addRecipient['errors'])) && (!empty($addRecipient['error']) || !empty($addRecipient['errors'])))
                     throw new Exception('Recipient Account not Added...!', 422);
 
