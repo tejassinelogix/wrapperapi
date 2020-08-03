@@ -34,6 +34,58 @@ class Transferwise_API
 		return $response;
 	}
 
+	public function addQuotes($postData = array())
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+		curl_setopt($ch, CURLOPT_URL, 'https://api.sandbox.transferwise.tech/v1/quotes');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+		// Header Set
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded;charset=utf-8'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: text/json'));
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->tokenCode));
+
+		if (!empty($postData)) {
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+		}
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		if (preg_match('/<p>HTTP Error 400\. The request is badly formed\.<\/p>/', $response)) {
+			$response = array('Message' => 'Bad Request');
+		} else {
+			$response = json_decode($response, true);
+		}
+		return $response;
+	}
+
+	public function getQuotes($postData = array())
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+		curl_setopt($ch, CURLOPT_URL, 'https://api.sandbox.transferwise.tech/v1/quotes/' . $postData['quoteId']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->tokenCode));
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		if (preg_match('/<p>HTTP Error 400\. The request is badly formed\.<\/p>/', $response)) {
+			$response = array('Message' => 'Bad Request');
+		} else {
+			$response = json_decode($response, true);
+		}
+		return $response;
+	}
+
 	public function addRecipientAccounts($postData = array())
 	{
 		$ch = curl_init();
@@ -45,6 +97,7 @@ class Transferwise_API
 
 		// Header Set
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->tokenCode));
 
 		if (!empty($postData)) {
@@ -54,6 +107,7 @@ class Transferwise_API
 
 		$response = curl_exec($ch);
 		curl_close($ch);
+
 		if (preg_match('/<p>HTTP Error 400\. The request is badly formed\.<\/p>/', $response)) {
 			$response = array('Message' => 'Bad Request');
 		} else {
@@ -62,7 +116,7 @@ class Transferwise_API
 		return $response;
 	}
 
-	public function addRecipientAccountsjignesh($postData = array())
+	public function addRecipientAccountsxxx($postData = array())
 	{
 		$headers = [];
 		$headers[] = "Authorization: Bearer " . $this->tokenCode;

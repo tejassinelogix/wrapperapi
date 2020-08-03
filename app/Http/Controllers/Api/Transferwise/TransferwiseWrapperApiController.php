@@ -56,12 +56,125 @@ class TransferwiseWrapperApiController extends Controller
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $getProfile = $transferWise->getProfileData();
 
-                if (isset($getProfile['error']) || !empty($getProfile['error']))
+                if ((isset($addRecipient['error']) || isset($addRecipient['errors'])) && (!empty($addRecipient['error']) || !empty($addRecipient['errors'])))
                     throw new Exception('Profile Id not found...!', 422);
 
                 $res['status'] = true;
                 $res['message'] = "Profile get successfully..!";
                 $res['data'] =  $getProfile;
+                return response()->json($res);
+            }
+        } catch (Exception $ex) {
+            $res['message'] = $ex->getMessage();
+            return response()->json($res, 422);
+        }
+    }
+
+    /*
+     @author    :: Tejas
+     @task_id   :: CreateQuotes Information from Transferwise
+     @task_desc :: CreateQuotes Information from Transferwise Server
+     @params    :: Token, profile, source, target, rateType, targetAmount, type
+     @return    :: json status true / false with data and message  
+    */
+    public function create_quotes(Request $request)
+    {
+        $res = Config('response_format.RES_RESULT');
+        try {
+            $validate = Validator::make($request->all(), [
+                'Token' => [
+                    'required', new MatchAuthCode,
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[0-9]/'      // must contain at least one digit
+                ],
+                'profile' => 'required',
+                'source' => 'required',
+                'target' => 'required',
+                'rateType' => 'required',
+                'targetAmount' => 'required',
+                'type' => 'required',
+            ]);
+
+            if ($validate->fails()) { // fails
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => $validate->messages(),
+                        'data' => []
+                    ],
+                    422
+                );
+            } else { // success
+
+                $postData['profile'] = $request->get("profile");
+                $postData['source'] = $request->get("source");
+                $postData['target'] = $request->get("target");
+                $postData['rateType'] = $request->get("rateType");
+                $postData['targetAmount'] = $request->get("targetAmount");
+                $postData['type'] = $request->get("type");
+
+                $transferWise = new Transferwise_API($request->get("Token"));
+                $addQuote = $transferWise->addQuotes($postData);
+                dd('response', $addQuote);
+                if ((isset($addQuote['error']) || isset($addQuote['errors'])) && (!empty($addQuote['error']) || !empty($addQuote['errors'])))
+                    throw new Exception('Quote is not Added...!', 422);
+
+                $res['status'] = true;
+                $res['message'] = "Quote is Added successfully..!";
+                $res['data'] =  $addQuote;
+                return response()->json($res);
+            }
+        } catch (Exception $ex) {
+            $res['message'] = $ex->getMessage();
+            return response()->json($res, 422);
+        }
+    }
+
+    /*
+     @author    :: Tejas
+     @task_id   :: GetQuotes Information from Transferwise
+     @task_desc :: GetQuotes Information from Transferwise Server
+     @params    :: Token, quoteId
+     @return    :: json status true / false with data and message  
+    */
+    public function get_quoteby_id(Request $request)
+    {
+        $res = Config('response_format.RES_RESULT');
+        try {
+            $validate = Validator::make($request->all(), [
+                'Token' => [
+                    'required', new MatchAuthCode,
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[0-9]/'      // must contain at least one digit
+                ],
+                'quoteId' => 'required'
+            ]);
+
+            if ($validate->fails()) { // fails
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => $validate->messages(),
+                        'data' => []
+                    ],
+                    422
+                );
+            } else { // success
+
+                $postData['quoteId'] = $request->get("quoteId");
+                $transferWise = new Transferwise_API($request->get("Token"));
+                $getQuote = $transferWise->getQuotes($postData);
+
+                if ((isset($getQuote['error']) || isset($getQuote['errors'])) && (!empty($getQuote['error']) || !empty($getQuote['errors'])))
+                    throw new Exception('Quote ID is not Found...!', 422);
+
+                $res['status'] = true;
+                $res['message'] = "Quote Details Fetch successfully..!";
+                $res['data'] =  $getQuote;
                 return response()->json($res);
             }
         } catch (Exception $ex) {
@@ -122,7 +235,7 @@ class TransferwiseWrapperApiController extends Controller
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $addRecipient = $transferWise->addRecipientAccounts($postData);
 
-                if (isset($addRecipient['error']) || !empty($addRecipient['error']))
+                if ((isset($addRecipient['error']) || isset($addRecipient['errors'])) && (!empty($addRecipient['error']) || !empty($addRecipient['errors'])))
                     throw new Exception('Recipient Account not Added...!', 422);
 
                 $res['status'] = true;
