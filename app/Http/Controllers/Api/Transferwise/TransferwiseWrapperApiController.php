@@ -107,7 +107,6 @@ class TransferwiseWrapperApiController extends Controller
                     422
                 );
             } else { // success
-
                 $postData['profile'] = $request->get("profile");
                 $postData['source'] = $request->get("source");
                 $postData['target'] = $request->get("target");
@@ -117,7 +116,7 @@ class TransferwiseWrapperApiController extends Controller
 
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $addQuote = $transferWise->addQuotes($postData);
-                dd('response', $addQuote);
+
                 if ((isset($addQuote['error']) || isset($addQuote['errors'])) && (!empty($addQuote['error']) || !empty($addQuote['errors'])))
                     throw new Exception('Quote is not Added...!', 422);
 
@@ -231,10 +230,10 @@ class TransferwiseWrapperApiController extends Controller
                 $postData['details']['legalType'] = $request->get("legalType");
                 $postData['details']['sortCode'] = $request->get("sortCode");
                 $postData['details']['accountNumber'] = $request->get("accountNumber");
-
+                // dd($postData);
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $addRecipient = $transferWise->addRecipientAccounts($postData);
-
+                dd($addRecipient);
                 if ((isset($addRecipient['error']) || isset($addRecipient['errors'])) && (!empty($addRecipient['error']) || !empty($addRecipient['errors'])))
                     throw new Exception('Recipient Account not Added...!', 422);
 
