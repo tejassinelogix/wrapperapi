@@ -247,4 +247,113 @@ class TransferwiseWrapperApiController extends Controller
             return response()->json($res, 422);
         }
     }
+
+    /*
+     @author    :: Tejas
+     @task_id   :: GetQuotePayInMethod Information from Transferwise
+     @task_desc :: GetQuotePayInMethod Information from Transferwise Server
+     @params    :: Token, quoteId
+     @return    :: json status true / false with data and message  
+    */
+    public function get_quote_payinmethod(Request $request)
+    {
+        $res = Config('response_format.RES_RESULT');
+        try {
+            $validate = Validator::make($request->all(), [
+                'Token' => [
+                    'required', new MatchAuthCode,
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[0-9]/'      // must contain at least one digit
+                ],
+                'quoteId' => 'required'
+            ]);
+
+            if ($validate->fails()) { // fails
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => $validate->messages(),
+                        'data' => []
+                    ],
+                    422
+                );
+            } else { // success
+
+                $postData['quoteId'] = $request->get("quoteId");
+
+                $transferWise = new Transferwise_API($request->get("Token"));
+                $getQuotePayMethod = $transferWise->getQuotePaymentMethods($postData);
+
+                if ((isset($getQuotePayMethod['error']) || isset($getQuotePayMethod['errors'])) && (!empty($addRecipient['error']) || !empty($getQuotePayMethod['errors'])))
+                    throw new Exception('Quote Pay-in Methods not fetch...!', 422);
+
+                $res['status'] = true;
+                $res['message'] = "Quote Pay-in Methods fetch successfully..!";
+                $res['data'] =  $getQuotePayMethod;
+                return response()->json($res);
+            }
+        } catch (Exception $ex) {
+            $res['message'] = $ex->getMessage();
+            return response()->json($res, 422);
+        }
+    }
+
+    /*
+     @author    :: Tejas
+     @task_id   :: GetTemporaryQuote Information from Transferwise
+     @task_desc :: GetTemporaryQuote Information from Transferwise Server
+     @params    :: Token, quoteId
+     @return    :: json status true / false with data and message  
+    */
+    public function get_temporary_quote(Request $request)
+    {
+        $res = Config('response_format.RES_RESULT');
+        try {
+            $validate = Validator::make($request->all(), [
+                'Token' => [
+                    'required', new MatchAuthCode,
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[0-9]/'      // must contain at least one digit
+                ],
+                'source' => 'required',
+                'target' => 'required',
+                'rateType' => 'required',
+                'targetAmount' => 'required',
+            ]);
+
+            if ($validate->fails()) { // fails
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => $validate->messages(),
+                        'data' => []
+                    ],
+                    422
+                );
+            } else { // success
+                $postData['source'] = $request->get("source");
+                $postData['target'] = $request->get("target");
+                $postData['rateType'] = $request->get("rateType");
+                $postData['targetAmount'] = $request->get("targetAmount");
+
+                $transferWise = new Transferwise_API($request->get("Token"));
+                $getQuotePayMethod = $transferWise->getTemporaryQuote($postData);
+                dd($getQuotePayMethod);
+                if ((isset($getQuotePayMethod['error']) || isset($getQuotePayMethod['errors'])) && (!empty($addRecipient['error']) || !empty($getQuotePayMethod['errors'])))
+                    throw new Exception('Quote Pay-in Methods not fetch...!', 422);
+
+                $res['status'] = true;
+                $res['message'] = "Quote Pay-in Methods fetch successfully..!";
+                $res['data'] =  $getQuotePayMethod;
+                return response()->json($res);
+            }
+        } catch (Exception $ex) {
+            $res['message'] = $ex->getMessage();
+            return response()->json($res, 422);
+        }
+    }
 }
