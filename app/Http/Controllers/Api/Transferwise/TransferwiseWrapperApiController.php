@@ -342,7 +342,7 @@ class TransferwiseWrapperApiController extends Controller
 
                 $transferWise = new Transferwise_API($request->get("Token"));
                 $getQuotePayMethod = $transferWise->getTemporaryQuote($postData);
-                dd($getQuotePayMethod);
+
                 if ((isset($getQuotePayMethod['error']) || isset($getQuotePayMethod['errors'])) && (!empty($addRecipient['error']) || !empty($getQuotePayMethod['errors'])))
                     throw new Exception('Quote Pay-in Methods not fetch...!', 422);
 

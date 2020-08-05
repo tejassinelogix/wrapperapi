@@ -26,6 +26,7 @@ class MatchAuthCode implements Rule
      */
     public function passes($attribute, $value)
     {
+        // dd($attribute,$value,Hash::make($value));
         if ($attribute == "authCode") {
             return Hash::check($value, Config('response_format.AuthCode'));
         }
