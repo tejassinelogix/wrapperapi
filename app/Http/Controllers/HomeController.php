@@ -41,10 +41,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function getcontainermaplist()
+    {
+        return view('shipsgo.getcontainermaplist')->with(['api_auth' => 'login']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function getcontainerlist()
     {
         return view('shipsgo.getcontainerlist')->with(['api_auth' => 'login']);
     }
+
 
     /**
      * Show the application dashboard.

@@ -34,6 +34,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // ShipsGo Get Requests
     Route::post('shipsgo/shippinglinelist', 'Api\ShipsGo\ShipsGoWrapperApiController@get_shippingline_list');
     Route::post('shipsgo/containerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@get_container_info');
+    Route::post('shipsgo/containerinfomap', 'Api\ShipsGo\ShipsGoWrapperApiController@get_containermap_info');
 
     // ShipsGo Post Requests Container Info
     Route::post('shipsgo/postcontainerinfo', 'Api\ShipsGo\ShipsGoWrapperApiController@post_container_info');

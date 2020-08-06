@@ -68,6 +68,11 @@ class ShipsGo_API
 		return $this->getData('GetContainerInfo/?authCode=' . $this->authCode . '&requestId=' . $searchParam);
 	}
 
+	public function GetContainerMapInfo($searchParam, $mapPoint = false)
+	{
+		return $this->getData('GetContainerInfo/?authCode=' . $this->authCode . '&requestId=' . $searchParam . '&mapPoint=' . $mapPoint);
+	}
+
 	public function PostContainerInfo(String $containerNumber, String $shippingLine, $emails = '', String $referenceNo = '')
 	{
 		$postData = array(

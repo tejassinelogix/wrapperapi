@@ -21,6 +21,7 @@ $(document).ready(function() {
                     "Bearer " + common.getCookie("jwt_token")
                 );
                 $(".response_content").html("");
+                $('#loader').show();
             },
             success: function(data_resp, textStatus, jqXHR) {
                 // On ajax success operation
@@ -157,6 +158,7 @@ $(document).ready(function() {
             complete: function() {
                 // On ajax complete operation
                 // console.log('Complete ajax send');
+                $('#loader').hide();
             }
         });
     });

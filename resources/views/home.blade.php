@@ -20,6 +20,8 @@
                         <a class='btn btn-primary btn-sm' id='post_container_info_bi' name='post_container_info_bi' href="{{ url('postcontainerbllist') }}"> Post Container Info With BL</a>
                         &nbsp;
                         <a class='btn btn-primary btn-sm' id='post_customcontainer_info_bi' name='post_customcontainer_info_bi' href="{{ url('postcustomcontainerbllist') }}"> Post Custom Container Info With BI</a>
+                        &nbsp;
+                        <a class='btn btn-primary btn-sm' id='get_containermap_info' name='get_containermap_info' href="{{ url('containerinfomap') }}"> Container Map Info</a>
                     </p>
                 </div>
 

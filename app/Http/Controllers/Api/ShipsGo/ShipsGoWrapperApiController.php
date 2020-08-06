@@ -123,6 +123,57 @@ class ShipsGoWrapperApiController extends Controller
 
     /*
      @author    :: Tejas
+     @task_id   :: GetContainerMap Information fetch from ShipsGo
+     @task_desc :: GetContainerMap Information fetch from ShipsGo Server
+     @params    :: AuthCode, RequestId, MapPoint
+     @return    :: json status true / false with data and message  
+    */
+    public function get_containermap_info(Request $request)
+    {
+        $res = Config('response_format.RES_RESULT');
+        try {
+            $validate = Validator::make($request->all(), [
+                'authCode' => [
+                    'required', new MatchAuthCode,
+                    // 'in:' . Config('response_format.AuthCode') . '', // Contains Predefined AuthCode
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[0-9]/'      // must contain at least one digit
+                ],
+                'requestId' => 'required'
+            ]);
+
+            if ($validate->fails()) { // fails
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => $validate->messages(),
+                        'data' => []
+                    ],
+                    422
+                );
+            } else { // success
+
+                $shipsGo = new ShipsGo_API($request->get("authCode"));
+                $getContainer = $shipsGo->GetContainerMapInfo($request->get("requestId"), $request->get("mapPoint"));
+
+                if (isset($getContainer['Message']) || !empty($getContainer['Message']))
+                    throw new Exception('Container Map Information not found...!', 422);
+
+                $res['status'] = true;
+                $res['message'] = "Container Map Information get successfully..!";
+                $res['data'] =  $getContainer;
+                return response()->json($res);
+            }
+        } catch (Exception $ex) {
+            $res['message'] = $ex->getMessage();
+            return response()->json($res, 422);
+        }
+    }
+
+    /*
+     @author    :: Tejas
      @task_id   :: PostContainer Information fetch from ShipsGo
      @task_desc :: PostContainer Information fetch from ShipsGo Server
      @params    :: AuthCode, RequestId, ShippingLine

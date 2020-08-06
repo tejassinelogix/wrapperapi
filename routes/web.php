@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 /* Wrapper API Load Form View */
 Route::get('/getshippinglinelist', 'HomeController@getshippinglinelist');
 Route::get('/getcontainerlist', 'HomeController@getcontainerlist');
+Route::get('/containerinfomap', 'HomeController@getcontainermaplist');
+
 // Post Wrapper Tickets
 Route::get('/postcontainerlist', 'HomeController@postcontainerlist');
 Route::get('/postcustomcontainerlist', 'HomeController@postcustomcontainerlist');
