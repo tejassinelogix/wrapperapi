@@ -47,13 +47,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
 /* JWT Token Verification for Transferwise Send Request and Receive Response */
 Route::group(['middleware' => ['jwt.verify']], function () {
-    // TransferWise Get Requests
+    // TransferWise Quote Requests
     Route::post('transferwise/profiles', 'Api\Transferwise\TransferwiseWrapperApiController@get_profile_info');
+    Route::post('transferwise/createquotes', 'Api\Transferwise\TransferwiseWrapperApiController@create_quotes');
     Route::post('transferwise/getquotes', 'Api\Transferwise\TransferwiseWrapperApiController@get_quoteby_id');
     Route::post('transferwise/getquotespayinmethod', 'Api\Transferwise\TransferwiseWrapperApiController@get_quote_payinmethod');
     Route::post('transferwise/gettempquotes', 'Api\Transferwise\TransferwiseWrapperApiController@get_temporary_quote');
+    // TransferWise Quote Requests Ends
 
-    // Create Recipient Accounts
-    Route::post('transferwise/createquotes', 'Api\Transferwise\TransferwiseWrapperApiController@create_quotes');
+    // TransferWise Create Recipient Accounts
     Route::post('transferwise/createrecipientaccount', 'Api\Transferwise\TransferwiseWrapperApiController@create_recipient_accounts');
+    Route::post('transferwise/createrecipientemail', 'Api\Transferwise\TransferwiseWrapperApiController@create_recipient_email');
+    // TransferWise Create Recipient Accounts Ends
 });
